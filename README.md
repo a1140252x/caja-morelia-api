@@ -44,9 +44,8 @@ dotnet run
 Este proyecto está estructurado siguiendo el patrón de arquitectura hexagonal.
 Separando las reglas de negocio, la infraestructura y las interfaces de entrada salida, facilitando el mantenimiento, escalabilidad y pruebas.
 
-
 Dominio. La capa dominio incluye 2 subcarpetas para almacenar las Entidades y los contratos (Interfaces) que deberán ser implementados
-
+```bash
 Domain/
 │
 ├── Entities/
@@ -54,12 +53,12 @@ Domain/
 │
 └── Interfaces/
     └── IClienteRepository.cs
-
+```
 
 Aplicación. La capa de Aplicación son los casos de uso del sistema. Contiene las reglas de aplicación que describen lo que el sistema debe hacer en respuesta a acciones del usuario o eventos del sistema.
 Recibe peticiones desde los controladores (capa de entrada) en la API.
 Utiliza las interfaces del dominio (IClienteRepository) para acceder a la base de datos.
-
+```bash
 Application/
 └── Services/
     ├── CrearClienteService.cs
@@ -67,19 +66,20 @@ Application/
     ├── EliminarClienteService.cs
     ├── ObtenerClienteService.cs
     └── ObtenerClientePorIdService.cs
+```
 
 Infrastructure. La capa de Infrastructure contiene las implementaciones concretas de las interfaces definidas en el dominio (IClienteRepository). Los repositorios implementan las interfaces del dominio y se comunican directamente con la base de datos usando Entity Framework Core. Recibe llamadas desde los servicios de aplicación.
-
+```bash
 Infrastructure/
 └── Repositories/
     └── ClienteRepository.cs
-
+```
 
 Middleware. El middleware permite interceptar peticiones HTTP antes de que lleguen al controlador. En este caso, se utiliza para verificar una API Key como medida de seguridad.
-
+```bash
 Middleware/
 └── ApiKeyMiddleware.cs
-
+```
 
 Controladores. El controlador ClientesController actua como adaptador para la capa de aplicación, es el encargado de manejar las solicitudes HTTP y delegar la lógica del negocio a los servicios de aplicación
 Resumen de Interacción
@@ -87,9 +87,10 @@ Resumen de Interacción
 - Llama a los Servicios de Aplicación (CrearClienteService, ActualizarClienteService, etc.).
 - Los Repositorios (definidos en la capa de Infraestructura) manejan el acceso a los datos.
 - Los resultados de las operaciones son devueltos a los controladores, los cuales responden al cliente con códigos HTTP adecuados (201 Created, 200 OK, 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, etc.)
-
+```bash
 Controllers/
 └── ClientesController.cs
+```
 
 
 ## 4. Ejemplos de Uso del CRUD de Clientes
