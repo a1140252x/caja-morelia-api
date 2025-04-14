@@ -2,5 +2,5 @@
 bin/
 obj/
 
-# Environment files
-.env
+# Environment files (para la prueba se deja el .env)
+# .env
